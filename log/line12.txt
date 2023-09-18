@@ -1,0 +1,247 @@
+#Please wait 2[s]#Please wait 1[s]#Please wait 0[s]
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocix :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est vx :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocix :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.00000x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000
+x :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velox :  0.000000 est :  0.000000
+angle :  0.000000 est :  0.000000
+est velocity:  0.000000

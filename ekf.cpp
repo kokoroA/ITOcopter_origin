@@ -82,18 +82,18 @@ float observe_y;
 // float Kd_v = 0;
 // float Kp = 1;
 // float Kp = 0.1;
-float Kp = 0.04; // 0.08   0.042
+float Kp = 0.044; // 0.08   0.042
 // float Ki = 900;//400Hz
 //float Ki = 128;//57 58 Hz    129  128.571
 //float Ki = 112.5;//50Hz
-float Ki = 38;//40Hz  90  45  43  42
+float Ki = 31;//40Hz  90  45  43  42
 float Kd = 0;
 // float Kp_v = 0.08;
-float Kp_v = 0.0017; //0.003 0.00172
+float Kp_v = 0.0026; //0.003 0.00172
 // float Ki_v = 300;//400Hz
 //float Ki_v = 42;//57 58Hz    43 42.857
 //float Ki_v = 37.5;//50Hz
-float Ki_v = 8;//40Hz  30  15  13  12
+float Ki_v = 4;//40Hz  30  15  13  12
 float Kd_v = 0;
 float u = 0;
 float u_v = 0;
@@ -110,7 +110,7 @@ float differential_v = 0;
 float eta = 0.125;
 
 //Kalmanfilter for Horizontal
-float h_horizontal = 0.2;
+float h_horizontal = 0.025;
 // float h_horizontal = 0.2;
 //推定,予測する状態
 float Xn_pre_1 = 0;
@@ -188,10 +188,10 @@ float u2 = -w0 * delta_phi * h_horizontal;
 float u3 = (delta_r * h_horizontal)/cos(theta0);
 //システムノイズ
 float q1 = 0.1;
-float q2 = 0.1;
+float q2 = 1.0;
 float q3 = 0.1;
 //観測の共分散
-float r1 = 0.01;
+float r1 = 0.0004;
 float r2 = 0.01;
 
 

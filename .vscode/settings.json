@@ -7,6 +7,19 @@
         "string": "cpp",
         "string_view": "cpp",
         "vector": "cpp",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "compare": "c",
+        "__bit_reference": "c",
+        "bitset": "c",
+        "chrono": "c",
+        "map": "c",
+        "set": "c",
+        "unordered_map": "c",
+        "algorithm": "c",
+        "format": "c",
+        "__locale": "c",
+        "functional": "c",
+        "numbers": "cpp",
+        "locale": "cpp"
     }
 }
