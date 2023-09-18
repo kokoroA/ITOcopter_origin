@@ -1,7 +1,7 @@
 CMakeFiles/pico_copter.dir/rgbled.cpp.obj: \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/rgbled.cpp \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/rgbled.hpp \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/WS2812.hpp \
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/rgbled.cpp \
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/rgbled.hpp \
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/WS2812.hpp \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/common/pico_base/include/pico/assert.h \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h \
@@ -26,9 +26,9 @@ CMakeFiles/pico_copter.dir/rgbled.cpp.obj: \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/rp2_common/hardware_pio/include/hardware/pio.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/common/pico_base/include/pico.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/common/pico_base/include/pico/types.h \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/build/generated/pico_base/pico/version.h \
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/build/generated/pico_base/pico/version.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/build/generated/pico_base/pico/config_autogen.h \
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/build/generated/pico_base/pico/config_autogen.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/boards/include/boards/pico.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \

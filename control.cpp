@@ -1279,8 +1279,8 @@ void processReceiveData(){
       if (token != NULL){
         TOL_y_diff = atof(token);
       }
-      TOL_x_diff_dash = ((2 * ideal * tan(Theta/2) * TOL_x_diff) / 160) - (ideal * tan(Phi));
-      TOL_y_diff_dash = ((2 * ideal * tan(Theta/2) * TOL_x_diff) / 160) - (ideal * tan(Theta));
+      TOL_x_diff_dash = ((TOL_x_diff * 497.46) / 80) - (700*tan(Phi));
+      TOL_y_diff_dash = ((TOL_y_diff * 497.46) / 80) - (700*tan(Theta));
       printf("TOL_x_diff : %9.6f dash : %9.6f\n",TOL_x_diff,TOL_x_diff_dash);
       printf("TOL_y_diff : %9.6f dash : %9.6f\n",TOL_y_diff,TOL_y_diff_dash);
     }
@@ -1301,14 +1301,15 @@ void processReceiveData(){
       if (token != NULL){
         line_number = atof(token);
       }
-      x_diff_dash = ((2 * 500 * tan(35) * -x_diff) / 160) - (500 * tan(Phi));
-      Kalman_holizontal(-1*x_diff,-1*angle_diff,(Wp - Pbias),(Wr - Rbias),(Phi - Phi_bias));
+      //x_diff_dash = ((2 * 500 * tan(35) * -x_diff) / 160) - (500 * tan(Phi));
+      x_diff_dash = ((x_diff * 497.46) / 80) - (700*tan(Phi));
+      Kalman_holizontal(x_diff,angle_diff,(Wp - Pbias),(Wr - Rbias),(Phi - Phi_bias));
       Line_range = Xn_est_2; //横ずれ
       Line_velocity = Xn_est_1; //速度
       current_time = time_us_64();
       // printf("x : %9.6f Est : %9.6f dash : %9.6f\n",x_diff,Line_range,x_diff_dash);
       // printf("angle : %9.6f est : %9.6f\n",angle_diff,Xn_est_3);
-      printf("%9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f\n",(start_time -current_time )/100000,x_diff,Line_range,x_diff_dash,Theta,Phi,angle_diff,Xn_est_3);
+      printf("%9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f\n",(current_time - start_time )/1000000,x_diff,Line_range,x_diff_dash,Theta,Phi,angle_diff,Xn_est_3,Xn_est_1);
     }
   }
 

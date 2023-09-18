@@ -1,6 +1,6 @@
 CMakeFiles/pico_copter.dir/sensor.cpp.obj: \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/sensor.cpp \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/sensor.hpp \
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/sensor.cpp \
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/sensor.hpp \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/string.h \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/_ansi.h \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/newlib.h \
@@ -48,9 +48,9 @@ CMakeFiles/pico_copter.dir/sensor.cpp.obj: \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/stdint.h \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/_intsup.h \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/build/generated/pico_base/pico/version.h \
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/build/generated/pico_base/pico/version.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/common/pico_base/include/pico/config.h \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/build/generated/pico_base/pico/config_autogen.h \
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/build/generated/pico_base/pico/config_autogen.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/boards/include/boards/pico.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/rp2_common/pico_platform/include/pico/platform.h \
@@ -87,7 +87,7 @@ CMakeFiles/pico_copter.dir/sensor.cpp.obj: \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/rp2_common/hardware_spi/include/hardware/spi.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/rp2040/hardware_structs/include/hardware/structs/spi.h \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/rp2040/hardware_regs/include/hardware/regs/spi.h \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/lsm9ds1_reg.h \
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/lsm9ds1_reg.h \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/math.h \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/cmath \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/bits/cpp_type_traits.h \
@@ -126,8 +126,8 @@ CMakeFiles/pico_copter.dir/sensor.cpp.obj: \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/tr1/poly_hermite.tcc \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/tr1/poly_laguerre.tcc \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/tr1/riemann_zeta.tcc \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/vl53l1_platform.h \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/vl53l1_types.h \
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/vl53l1_platform.h \
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/vl53l1_types.h \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/stdlib.h \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/c++/10.3.1/cstdlib \
  /Users/kokoro/Documents/drone_project/pico/pico-sdk/src/rp2_common/hardware_i2c/include/hardware/i2c.h \
@@ -148,4 +148,4 @@ CMakeFiles/pico_copter.dir/sensor.cpp.obj: \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/machine/time.h \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/unistd.h \
  /usr/local/Cellar/arm-none-eabi-gcc/10.3-2021.07/gcc/arm-none-eabi/include/sys/unistd.h \
- /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin/VL53L1X_api.h
+ /Users/kokoro/Documents/drone_project/pico/pico-sdk/ITOcopter_origin\ 3/VL53L1X_api.h
