@@ -28,7 +28,7 @@ float range_flag = 0;
 uint16_t altitude_count = 0;
 // float stick;
 float auto_mode = 0;
-float ideal;
+float ideal=0;
 float hove_distance;
 float hove_time = 0.0;
 float flying_mode = 0;
@@ -47,7 +47,9 @@ uint8_t print_flag = 0;
 float x_diff = 0;
 float angle_diff = 0;
 float x_diff_dash = 0; 
-
+float x_alpha = 0;
+float TOL_x_alpha = 0;
+float TOL_y_alpha = 0;
 float red_circle = 0;
 float TOL_x_diff = 0;
 float TOL_y_diff = 0;
@@ -56,13 +58,17 @@ float TOL_x_ref = 80;
 float TOL_y_ref = 60;
 float TOL_x_err = 0;
 float TOL_y_err = 0;
+float TOL_x = 0;
+float TOL_y = 0;
 float TOL_x_diff_dash = 0;
 float TOL_y_diff_dash = 0;
 float takeoff_counter = 0;
 float landing_counter = 0;
 float line_trace_flag = 0;
-float gap_number = 0;
-
+float gap_number = 0; 
+float T_merker_flag = 0;
+float L_merker_flag = 0;
+float i = 0;
 //Sensor data
 float Ax,Ay,Az,Wp,Wq,Wr,Mx,My,Mz,Mx0,My0,Mz0,Mx_ave,My_ave,Mz_ave;
 float Acc_norm=0.0;
@@ -101,7 +107,7 @@ float Phi_ref=0.0,Theta_ref=0.0,Psi_ref=0.0;
 float Elevator_center=0.0, Aileron_center=0.0, Rudder_center=0.0;
 float Pref=0.0,Qref=0.0,Rref=0.0;
 const float Phi_trim   = 0;//-0.05;
-const float Theta_trim = 0;//0.065;
+const float Theta_trim = 0.065;//0.065;
 const float Psi_trim   = 0.0;
 const double pi = 3.14159;
 float Line_trace_flag = 0;
@@ -124,7 +130,7 @@ uint16_t LogdataCounter=0;
 uint8_t Logflag=0;
 volatile uint8_t Logoutputflag=0;
 float Log_time=0.0;
-const uint8_t DATANUM=5; //Log Data Number 38
+const uint8_t DATANUM=14; //Log Data Number 38
 const uint32_t LOGDATANUM=48000;
 float Logdata[LOGDATANUM]={0.0};
 
@@ -144,6 +150,8 @@ PID theta_pid;
 PID psi_pid;
 PID v_pid;
 PID y_pid;
+PID TOL_phi_pid;
+PID TOL_theta_pid;
 
 
 void loop_400Hz(void);
@@ -194,7 +202,7 @@ void led_control(void)
   
   else if (Arm_flag == 2 && Red_flag == 1) rgbled_red();
   
-  else if (Arm_flag == 2 && Red_flag == 0 && Logflag == 1) rgbled_orange();
+  // else if (Arm_flag == 2 && Red_flag == 0 && Logflag == 1) rgbled_orange();
 
   else if (Arm_flag == 3)
   {
@@ -433,7 +441,6 @@ void send_data_via_uart(const char* data) {
     }
 }
 
-
 void control_init(void)
 {
   acc_filter.set_parameter(0.005, 0.0025);
@@ -445,7 +452,9 @@ void control_init(void)
   phi_pid.set_parameter  ( 8.0, 20.0, 0.007, 0.125, 0.01);//6.0
   theta_pid.set_parameter( 8.0, 20.0, 0.007, 0.125, 0.01);//6.0
   psi_pid.set_parameter  ( 0, 1000, 0.01, 0.125, 0.01);
-
+  //TOL
+  TOL_phi_pid.set_parameter  ( 0.1, 50, 0.0001, 0.125, 0.03);//6.0
+  TOL_theta_pid.set_parameter( 0.1, 50, 0.0001, 0.125, 0.03);//6.0
  //velocity control
  v_pid.set_parameter (0.05, 100, 0.09, 0.125, 0.025);
 
@@ -562,43 +571,20 @@ void Auto_landing(void){
   }
   else if (mu_Yn_est(1,0) > 250)//250
   {
-    ideal = ideal - 20;//高度の目標値更新のコード // 0.45
+    ideal = ideal - 40;//高度の目標値更新のコード // 0.45 20
     if (ideal <= 0){
       ideal = 0;
     }
     input = alt_PID(ideal);
-    T_ref = T_stick + (input);
+    T_ref = T_stick + (input) - 0.0007;
   }
   else if(mu_Yn_est(1,0) <= 250){ // 250
     T_ref = T_ref - 0.03; // 0.03
   }
-
 }
 
 //自動離陸
 void Auto_takeoff(void){
-  // if (T_ref < 4.4)//3.5
-  // {
-  //   T_stick = T_stick + 0.07;
-  //   T_ref = T_stick;
-  // }
-  // else{
-  //   ideal = 500;
-  //   // Hovering();
-  //   // flying_mode = 2;
-  //   line_trace_flag = 1;
-  //   takeoff_counter = 1;
-  //   // if (hove_time < 5)
-  //   // {
-  //   //   input = alt_PID(ideal);
-  //   //   T_ref = T_stick + (input);
-  //   //   hove_time = hove_time + 0.025;
-  //   // }
-  //   // else{
-  //   //   line_trace_flag = 1;
-  //   //   takeoff_counter = 1;
-  //   // }
-  // }
   if (mu_Yn_est(1,0) <= 650){
     if (T_ref < 4){//3.4  4.6 4
       T_stick = T_stick + 0.1;
@@ -615,28 +601,91 @@ void Auto_takeoff(void){
     // flying_mode = 2;
     line_trace_flag = 1;
     takeoff_counter = 1;
+    landing_counter = 1;
   }
 }
 
 void takeoff_merker(void){
-  //目標値との誤差
-  TOL_x_err = TOL_x_ref - TOL_x_diff;
-  TOL_y_err = TOL_y_ref - TOL_y_diff;
 
-  Pref = phi_pid.update(TOL_x_err);
-  Qref = theta_pid.update(TOL_y_err);
-  Auto_takeoff();
+if (mu_Yn_est(1,0) <= 650){
+  if (T_ref < 4){//3.4  4.6 4
+    T_stick = T_stick + 0.1;
+    T_ref = T_stick;
+  }
+  else {
+    T_merker_flag = 1;
+    T_stick = T_stick + 0.001;//0.002
+    T_ref = T_stick;
+  }
+  if (T_merker_flag ==1){
+    //目標値との誤差
+    TOL_x_err = 0.02*(TOL_x_ref - TOL_x_diff);
+    TOL_y_err = 0.02*(TOL_y_ref - TOL_y_diff);
+
+    Pref = phi_pid.update(TOL_x_err);
+    Qref = theta_pid.update(TOL_y_err);
+  }
+}
+else{
+  ideal = 700;
+  //Hovering();
+  // flying_mode = 2;
+  // line_trace_flag = 1;
+  takeoff_counter = 1;
+  landing_counter = 1;
+}
 }
 //離陸と着陸で使うTOL変数が同じで大丈夫かの確認
 
 void landing_merker(void){
-  //目標値との誤差
-  TOL_x_err = TOL_x_ref - TOL_x_diff;
-  TOL_y_err = TOL_y_ref - TOL_y_diff;
+  // // //目標値との誤差
 
-  Pref = phi_pid.update(TOL_x_err);
-  Qref = theta_pid.update(TOL_y_err);
-  Auto_landing();
+  // TOL_x = (TOL_x_diff - 80.5)*-1;
+  // TOL_y = (TOL_y_diff - 60.5)*-1;
+  // // // TOL_x_err = 0.006065*(TOL_x_ref - TOL_x_diff) * 1;  //0.007723  0.008086
+  // // // TOL_y_err = 0.0058177*(TOL_y_ref - TOL_y_diff) * 1;
+  // TOL_x_err = (0 - TOL_x) * 0.05;
+  // TOL_y_err = (0 - TOL_y) * 0.05;
+
+  // Phi_ref = TOL_phi_pid.update(TOL_x_err);//phi_pid.update(TOL_x_err);
+  // Theta_ref = TOL_theta_pid.update(TOL_y_err);//theta_pid.update(TOL_y_err);
+  
+
+  // Theta_ref = Theta_ref - 0.065;
+
+  // if (TOL_x_err <= 0){
+  //   Phi_ref = -0.2*(pi/180);
+  // }
+  // else{
+  //   Phi_ref = 0.2*(pi/180);
+  // }
+
+  // if (TOL_y_err < 0){
+  //   Theta_ref = 0.2*(pi/180)+ 0.065;
+  // }
+  // else{
+  //   Theta_ref = -0.2*(pi/180)+ 0.065;
+  // }
+
+  //Auto_landing();
+
+  // if (mu_Yn_est(1,0) <= 120){
+  //   stop_flag = 1;
+  //   landing_counter = 0;
+  // }
+  // else if (mu_Yn_est(1,0) > 250)//250
+  // {
+  //   ideal = ideal - 30;//高度の目標値更新のコード // 0.45
+  //   if (ideal <= 0){
+  //     ideal = 0;
+  //   }
+  //   input = alt_PID(ideal);
+  //   T_ref = T_stick + (input);
+  // }
+  // else if(mu_Yn_est(1,0) <= 250){ // 250
+  //   T_ref = T_ref - 0.03; // 0.03
+  // }
+
 }
 
 // サーボ追加----------------------------------------------------
@@ -762,9 +811,10 @@ void rate_control(void)
   //     }
   //     //printf("Auto Kalman_alt : %9.6f\n",Kalman_alt);
   //     //Auto_fly();
-  //     Auto_takeoff();
+  //     // Auto_takeoff();
   //     //Auto_landing();
   //     //Hovering();
+  //     landing_merker();
   //   }
   //   count_up += 1;
   // }
@@ -842,7 +892,10 @@ void rate_control(void)
   if (RL_duty > maximum_duty) RL_duty = maximum_duty;
 
   //Duty set
-  if(T_ref/BATTERY_VOLTAGE < Disable_duty)
+  if (stop_flag ==1){
+    motor_stop();
+  }
+  else if(T_ref/BATTERY_VOLTAGE < Disable_duty)
   {
     motor_stop();
     p_pid.reset();
@@ -857,9 +910,6 @@ void rate_control(void)
     Phi_bias   = Phi;
     Theta_bias = Theta;
     Psi_bias   = Psi;
-  }
-  else if(stop_flag == 1){
-    motor_stop();
   }
   else
   {
@@ -967,13 +1017,16 @@ void angle_control(void)
 
       Pref = phi_pid.update(phi_err);
       Qref = theta_pid.update(theta_err);
+      Rref = Psi_ref;
       if(Flight_mode != LINETRACE)
       {
+        // Pref = phi_pid.update(phi_err);
+        // Qref = theta_pid.update(theta_err);
         Rref = Psi_ref;
       }
       else if(Flight_mode == LINETRACE)
       {
-        Rref = psi_pid.update(psi_err);
+        //Rref = psi_pid.update(psi_err);
       }
     }
 
@@ -991,23 +1044,33 @@ void angle_control(void)
 
     //saturation Pref
     if (Pref >= (rate_limit*pi/180))
-    {
-      Pref = rate_limit*pi/180;
-    }
+      {
+        Pref = rate_limit*pi/180;
+      }
     else if (Pref <= -(rate_limit*pi/180))
-    {
-      Pref = -(rate_limit*pi/180);
-    }
+      {
+        Pref = -(rate_limit*pi/180);
+      }
 
     //saturation Qref
+    // else{
+    //   if (Qref >= (rate_limit*pi/180))
+    //   {
+    //     Qref = rate_limit*pi/180;
+    //   }
+    //   else if (Qref <= -(rate_limit*pi/180))
+    //   {
+    //     Qref = -(rate_limit*pi/180);
+    //   }
+    // }
     if (Qref >= (rate_limit*pi/180))
-    {
-      Qref = rate_limit*pi/180;
-    }
+      {
+        Qref = rate_limit*pi/180;
+      }
     else if (Qref <= -(rate_limit*pi/180))
-    {
-      Qref = -(rate_limit*pi/180);
-    }
+      {
+        Qref = -(rate_limit*pi/180);
+      }
 
     //Logging  100Hzで情報を記憶
     logging();
@@ -1037,28 +1100,46 @@ float rocking_wings(float stick)
 // --------------------------------ライントレース--------------------------------------
 void linetrace(void)
 {
+
+  //landing_merker();
   // Auto_takeoff();
+  //Auto_landing();
   //離陸
   // if(takeoff_counter == 0){
   //   // send_data_via_uart("TOL_mode\n");
-  //   //takeoff_merker();
-  //   Auto_takeoff();
+  //   takeoff_merker();
+  //   //Auto_takeoff();
   // }
-  takeoff_counter = 1;
-  landing_counter = 0;
-  line_trace_flag = 1;
+
+  // takeoff_counter = 1;
+  landing_counter = 1;
+  //line_trace_flag = 1;
+
   //ライントレース & ホバリング
   // line_trace_flag = 1;
-  if(line_trace_flag == 1){
+  // if(line_trace_flag == 1){
+  if(landing_counter == 1){
       //send_data_via_uart("line_trace\n");
-    // if(auto_mode_count ==1){
-    //   auto_mode_count = 0;
-    //   ideal = Kalman_alt;
-    //   T_stick = 0.6 * BATTERY_VOLTAGE*(float)(Chdata[2]-CH3MIN)/(CH3MAX-CH3MIN);
-    // }
+    if(auto_mode_count ==1){
+      auto_mode_count = 0;
+      ideal = mu_Yn_est(1,0);
+      T_stick = 0.6 * BATTERY_VOLTAGE*(float)(Chdata[2]-CH3MIN)/(CH3MAX-CH3MIN);
+    }
 
-    Hovering();
+    //Hovering();
+    
+    //landing_merker();
+    TOL_x = (TOL_x_diff - 80.5)*-1;
+    TOL_y = (TOL_y_diff - 60.5)*-1;
+    // // TOL_x_err = 0.006065*(TOL_x_ref - TOL_x_diff) * 1;  //0.007723  0.008086
+    // // TOL_y_err = 0.0058177*(TOL_y_ref - TOL_y_diff) * 1;
+    TOL_x_err = (0 - TOL_x) * 0.01;
+    TOL_y_err = (0 - TOL_y) * 0.01;
 
+    Phi_ref = TOL_phi_pid.update(TOL_x_err);//phi_pid.update(TOL_x_err);
+    Theta_ref = TOL_theta_pid.update(TOL_y_err);//theta_pid.update(TOL_y_err);
+  
+    Auto_landing();
   //前進（ピッチ角の制御） 
     // if (hove_time < 17){
     //   hove_time += 0.025;
@@ -1070,6 +1151,7 @@ void linetrace(void)
     //   //Auto_landing();
     //   landing_merker();
     // }
+    
     // Theta_ref = -0.5*(pi/180);
 
     // //目標値との誤差
@@ -1141,7 +1223,16 @@ void logging(void)
       Logdata[LogdataCounter++]=ideal; 
       Logdata[LogdataCounter++]=T_ref;  
       Logdata[LogdataCounter++]=input;  
-      Logdata[LogdataCounter++]=line_trace_flag;              //1
+      Logdata[LogdataCounter++]=TOL_x_diff;      
+      Logdata[LogdataCounter++]=TOL_y_diff;
+      Logdata[LogdataCounter++]=TOL_x_err; 
+      Logdata[LogdataCounter++]=TOL_y_err; 
+      Logdata[LogdataCounter++]=Phi;
+      Logdata[LogdataCounter++]=Theta;  
+      Logdata[LogdataCounter++]=Phi_ref;
+      Logdata[LogdataCounter++]=Theta_ref;  
+      Logdata[LogdataCounter++]=P_com;
+      Logdata[LogdataCounter++]=Q_com;     
     // if(LogdataCounter+DATANUM<LOGDATANUM)
     // {
     //   Logdata[LogdataCounter++]=Xe(0,0);                  //1
@@ -1265,24 +1356,35 @@ void processReceiveData(){
   clear_data[strlen(clear_data) -1 ] = '\0';//)をヌル文字に置き換え
   char* token;
 
-
   // printf("KAWASAKI\n");
 
   if (Flight_mode == LINETRACE){
+    // token = strtok(clear_data,",");
+    // if (token != NULL){
+    //   TOL_x_diff = atof(token);
+    // }
+    // token = strtok(NULL,",");
+    // if (token != NULL){
+    //   TOL_y_diff = atof(token);
+    // }
+    // printf("%9.6f \n",TOL_x_diff);
+    // printf("%9.6f \n",TOL_y_diff);
+
     if(takeoff_counter == 0 || landing_counter ==1){
       token = strtok(clear_data,",");
       if (token != NULL){
         TOL_x_diff = atof(token);
       }
-
       token = strtok(NULL,",");
       if (token != NULL){
         TOL_y_diff = atof(token);
       }
-      TOL_x_diff_dash = ((TOL_x_diff * 497.46) / 80) - (700*tan(Phi));
-      TOL_y_diff_dash = ((TOL_y_diff * 497.46) / 80) - (700*tan(Theta));
-      printf("TOL_x_diff : %9.6f dash : %9.6f\n",TOL_x_diff,TOL_x_diff_dash);
-      printf("TOL_y_diff : %9.6f dash : %9.6f\n",TOL_y_diff,TOL_y_diff_dash);
+      // TOL_x_alpha = atan2(TOL_x_diff,118);
+      // TOL_y_alpha = atan2(TOL_y_diff,87);
+      // TOL_x_diff_dash = 700 * tan(Phi - TOL_x_alpha);
+      // TOL_y_diff_dash = 700 * tan(Theta - TOL_y_alpha);
+      // printf("%9.6f %9.6f\n",TOL_x_diff,TOL_x_diff_dash);
+      // printf("%9.6f %9.6f\n",TOL_y_diff,TOL_y_diff_dash);
     }
     else{
       token = strtok(clear_data,",");
@@ -1302,14 +1404,16 @@ void processReceiveData(){
         line_number = atof(token);
       }
       //x_diff_dash = ((2 * 500 * tan(35) * -x_diff) / 160) - (500 * tan(Phi));
-      x_diff_dash = ((x_diff * 497.46) / 80) - (700*tan(Phi));
-      Kalman_holizontal(x_diff,angle_diff,(Wp - Pbias),(Wr - Rbias),(Phi - Phi_bias));
+      // x_diff_dash = ((x_diff * 497.46) / 80) - (700*tan(Phi));
+      x_alpha = atan2(x_diff,118);
+      x_diff_dash = 700 * tan(Phi - x_alpha);
+      Kalman_holizontal(x_diff_dash,angle_diff,(Wp - Pbias),(Wr - Rbias),(Phi - Phi_bias));
       Line_range = Xn_est_2; //横ずれ
       Line_velocity = Xn_est_1; //速度
-      current_time = time_us_64();
+      // current_time = time_us_64();
       // printf("x : %9.6f Est : %9.6f dash : %9.6f\n",x_diff,Line_range,x_diff_dash);
       // printf("angle : %9.6f est : %9.6f\n",angle_diff,Xn_est_3);
-      printf("%9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f\n",(current_time - start_time )/1000000,x_diff,Line_range,x_diff_dash,Theta,Phi,angle_diff,Xn_est_3,Xn_est_1);
+      //printf("%9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f %9.6f\n",(current_time - start_time )/1000000,x_diff,Line_range,x_diff_dash,Theta,Phi,angle_diff,Xn_est_3,Xn_est_1,x_alpha);
     }
   }
 
@@ -1319,8 +1423,8 @@ void processReceiveData(){
     //   red_circle = atof(token);
     // }
     red_circle = atof(clear_data);
-    printf("red_circle: %9.6f\n", red_circle);
-    printf("KAWASAKI");
+    //printf("red_circle: %9.6f\n", red_circle);
+    //printf("KAWASAKI");
   }
 
   // printf("x : %9.6f\n",x_diff);
@@ -1450,8 +1554,8 @@ const float zoom[3]={0.003077277151877191, 0.0031893151610213463, 0.003383279497
     }
   }
 
-  //OpenMV通信用
-  if ((Flight_mode == LINETRACE) || (Flight_mode == REDCIRCLE) && (i2c_connect == 1)){
+  // //OpenMV通信用
+  if (Flight_mode == LINETRACE && i2c_connect == 1){
     while (uart_is_readable(UART_ID2)){
       char c = uart_getc(UART_ID2);
       receiveData(c);
@@ -1460,41 +1564,22 @@ const float zoom[3]={0.003077277151877191, 0.0031893151610213463, 0.003383279497
     if(Flight_mode == LINETRACE){
       //着陸のFlightModeを決める
       if(takeoff_counter == 0 || landing_counter == 1 ){
-        uart_putc(UART_ID2,'3');
+      uart_putc(UART_ID2,'3');
       }
       else{
         uart_putc(UART_ID2,'1');
       }
     }
     if(Flight_mode == REDCIRCLE){
-      uart_putc(UART_ID2,'2');
+    uart_putc(UART_ID2,'2');
     }
-    
-
   }
-  // if (Flight_mode == LINETRACE && i2c_connect == 1){
-  //   while (uart_is_readable(UART_ID2)){
-  //     char c = uart_getc(UART_ID2);
-  //     receiveData(c);
-  //   }
 
-  //   if(Flight_mode == LINETRACE){
-  //   uart_putc(UART_ID2,'1');
-  //   }
-  //   if(Flight_mode == REDCIRCLE){
-  //   uart_putc(UART_ID2,'2');
-  //   }
-  //   //着陸のFlightModeを決める
-  //   if(takeoff_counter == 0 || landing_counter == 1 ){
-  //   uart_putc(UART_ID2,'3');
-  //   }
-  // }
-
-  // 条件が満たされた場合にデータを送信
-  // if (Flight_mode == REDCIRCLE)
-  // {
-  // send_data_via_uart("switch_mode\n");
-  // }
+  //条件が満たされた場合にデータを送信
+  if (Flight_mode == REDCIRCLE)
+  {
+  send_data_via_uart("switch_mode\n");
+  }
 
 }
 
